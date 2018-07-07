@@ -1,10 +1,19 @@
 body {
-  font-family: Verdana;
+  background-color: rgb(28, 36, 55);
+  /* font-family: Verdana; */
+  color: rgba(173, 179, 195, 1);
 }
 
+h1{
+  font-family: Helvetica, Arial;
+}
 a {
   color: #fff;
   text-decoration: none;
+}
+
+#title, #body{
+  color: rgba(173, 179, 195, 1);
 }
 
 #side-header{
@@ -14,7 +23,7 @@ a {
   /* border: solid 2px cyan; */
 }
 #lower{
-  margin-top: 15px;
+  margin-top: 3px;
 }
 #new-btn{
   font: 40px Helvetica;
@@ -40,8 +49,16 @@ a {
   font-size: 12px;
 }
 
-#body{
+#clicked-body{
   font-size: 16px;
+  color: rgba(173, 179, 195, 1);
+  width: 100%;
+  display: block;
+  box-sizing: padding-box;
+  overflow: hidden;
+  padding: 0px;
+  line-height: 1.5;
+  box-shadow: 2px 2px 8px rgba(white, .9);
 }
 
 #sidebar h2{
@@ -52,8 +69,14 @@ a {
 #main, h1 {
     margin-left: 310px; /* Same as the width of the sidebar */
     padding: 5px 10px;
+    padding-right: 50px;
 }
 
 #main {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(173, 179, 195, 1);
 }
+.new-form, .note-div{
+  max-width: 700px;
+  margin: auto 0;
+}
+.note-body{white-space: pre-wrap;}

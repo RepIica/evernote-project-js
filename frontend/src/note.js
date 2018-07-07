@@ -16,9 +16,7 @@ class Note {
         <h4 class="note-title" data-id="${this.id}">
           ${this.title}
         </h4>
-        <p class="note-body" data-id="${this.id}">
-          ${this.body}
-        </p>
+        <p class="note-body" data-id="${this.id}">${this.body}</p>
       </div>
     `;
   }

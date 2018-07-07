@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
   noteAdapter.getNotes()
     .then((data) => notesController.renderNotesList(data));
 
-  ol.addEventListener('click', (event) => {
+  ol.addEventListener('click', (event) => { //show full note on click
     event.preventDefault()
     if(event.target.nodeName === "LI"){
       const listTitle = event.target.innerHTML
@@ -19,42 +19,42 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  newBtn.addEventListener('click', (e) => {
+  newBtn.addEventListener('click', (e) => { //show new note form on click
     if (e.target.nodeName) {
       notesController.renderForm()
     }
   })
 
-  main.addEventListener('click', (e) =>{
+  main.addEventListener('click', (e) =>{ //show note body editor on click
     if (e.target.className==='note-body') {
       noteAdapter.getNote(e.target.dataset.id)
         .then((noteObj) => {
-          notesController.editBody(noteObj)
+          notesController.renderEditBody(noteObj)
         })
     }
   })
 
-  main.addEventListener('submit', (e) => {
+  main.addEventListener('submit', (e) => { //submits new note on submit
     if (e.target.nodeName === 'FORM') {
       e.preventDefault()
       const formTitle = main.querySelector('#title').value
       const formBody = main.querySelector('#body').value
       const note = new Note({title: formTitle, body: formBody})
       noteAdapter.newNote(note)
-
+      notesController.updateNewNoteLi(note)
     }
   })
 
-  //editBody needs defining in adapter
-  main.addEventListener('click', (e) => {
-    if (e.target.className==='new-form') {
-      noteAdapter.newNote(e.target.dataset.id)
-        .then((noteObj) => {
-          notesController.editBody(noteObj)
-        })
-      // noteAdapter.getNotes()
-      //   .then((noteObjs) => notesController.renderNotesList(noteObjs))
-    }
-  })
+  // ??? edit?
+  // main.addEventListener('click', (e) => {
+  //   if (e.target.className==='new-form') {
+  //     noteAdapter.newNote(e.target.dataset.id)
+  //       .then((noteObj) => {
+  //         notesController.editBody(noteObj)
+  //       })
+  //     noteAdapter.getNotes()
+  //       .then((noteObjs) => notesController.renderNotesList(noteObjs))
+  //   }
+  // })
 
 });

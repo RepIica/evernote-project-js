@@ -12,7 +12,12 @@ const NotesController = (() => {
       });
     }
 
-    renderNote(note){
+    updateNewNoteLi(note){
+      const ol = document.querySelector("#note-list");
+      ol.innerHTML += note.el()
+    }
+
+    renderNote(note){ //shows full note
       const newNote = new Note(note);
       main.innerHTML = ''
       main.innerHTML += newNote.display()
@@ -23,7 +28,7 @@ const NotesController = (() => {
       main.innerHTML += displayForm()
     }
 
-    editBody(noteObj){
+    renderEditBody(noteObj){
       const newDog = new Note(noteObj)
       main.querySelector('.note-body').remove()
       main.innerHTML += displayBody()
@@ -41,9 +46,9 @@ const NotesController = (() => {
         <br>
         <label for="body">Note Body:</label>
         <br>
-        <textarea name="body" id="body" rows="8" cols="80"></textarea>
+        <textarea name="body" id="body" class="auto-expand" rows="8" cols="80"></textarea>
         <br>
-        <input type="submit" name="" value="Create Note">
+        <input class="button-outline" type="submit" name="" value="Create Note">
       </form>
     `
   }
@@ -51,7 +56,7 @@ const NotesController = (() => {
   function displayBody(){
     return `
       <form>
-        <textarea name="body" id="body" rows="8" cols="100"></textarea>
+        <textarea name="body" id="clicked-body" class"auto-expand"></textarea>
       </form>
     `
   }
