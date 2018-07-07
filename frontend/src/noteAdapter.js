@@ -42,4 +42,13 @@ class NoteAdapter {
       .then(response => console.log('Success:', response))
   }
 
+  deleteNote(id) {
+    const baseURL = `http://localhost:3000/api/v1/notes/${id}`
+    const options = {
+      method: 'DELETE'
+    }
+    return fetch(baseURL,options)
+      .then(r => r.json())
+  }
+
 }

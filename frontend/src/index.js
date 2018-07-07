@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
     event.preventDefault()
     if(event.target.nodeName === "LI"){
       const listTitle = event.target.innerHTML
-      const id = event.target.getAttribute("id");
+      const id = event.target.getAttribute("data-id");
       noteAdapter.getNote(id)
         .then((note) => notesController.renderNote(note))
     }
@@ -44,6 +44,22 @@ document.addEventListener("DOMContentLoaded", function() {
       notesController.updateNewNoteLi(note)
     }
   })
+
+  main.addEventListener('click', e => {
+    if (e.target.innerHTML === 'delete note') {
+      const id = e.target.dataset.id
+      noteAdapter.deleteNote(id)
+      const lists = document.querySelector('#note-list').querySelectorAll('li')
+      lists.forEach(li => {
+        if (li.dataset.id === id) {
+          li.remove()
+        }
+      })
+      main.innerHTML = ''
+    }
+  })
+
+
 
   // ??? edit?
   // main.addEventListener('click', (e) => {

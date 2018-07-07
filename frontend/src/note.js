@@ -7,7 +7,7 @@ class Note {
   }
 
   el(){
-    return `<a href="#"><li id="${this.id}">${this.title}</li></a>`;
+    return `<a href="#"><li data-id="${this.id}">${this.title}</li></a>`;
   }
 
   display(){
@@ -17,6 +17,8 @@ class Note {
           ${this.title}
         </h4>
         <p class="note-body" data-id="${this.id}">${this.body}</p>
+        <button class="button-outline" data-id="${this.id}">delete note</button>
+        <button class="button-outline" data-id="${this.id}">edit note</button>
       </div>
     `;
   }
