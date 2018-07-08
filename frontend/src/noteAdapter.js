@@ -26,15 +26,15 @@ class NoteAdapter {
       .then(response => console.log('Success:', response))
   }
 
-  editNote(data) {
-    const baseURL = `http://localhost:3000/api/v1/notes/${id}`
-    // delete data.id
+  editNote(obj) {
+    const baseURL = `http://localhost:3000/api/v1/notes/${obj.id}`
+    delete obj.id
     const options = {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(obj)
     }
     return fetch(baseURL, options)
       .then(r => r.json())

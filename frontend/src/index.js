@@ -25,17 +25,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })
 
-  main.addEventListener('click', (e) =>{ //show note body editor on click
-    if (e.target.className==='note-body') {
-      noteAdapter.getNote(e.target.dataset.id)
-        .then((noteObj) => {
-          notesController.renderEditBody(noteObj)
-        })
-    }
-  })
+  // main.addEventListener('click', (e) =>{ //show note body editor on click
+  //   if (e.target.className==='note-body') {
+  //     noteAdapter.getNote(e.target.dataset.id)
+  //       .then((noteObj) => {
+  //         notesController.renderEditBody(noteObj)
+  //       })
+  //   }
+  // })
 
   main.addEventListener('submit', (e) => { //submits new note on submit
-    if (e.target.nodeName === 'FORM') {
+    if (e.target.className === 'new-form') {
       e.preventDefault()
       const formTitle = main.querySelector('#title').value
       const formBody = main.querySelector('#body').value
@@ -58,6 +58,36 @@ document.addEventListener("DOMContentLoaded", function() {
       main.innerHTML = ''
     }
   })
+
+  main.addEventListener('click', e => {
+    if (e.target.innerHTML === 'edit note') {
+      noteAdapter.getNote(e.target.dataset.id)
+        .then(obj => {
+          notesController.renderEditForm()
+          const formTitle = main.querySelector('#title')
+          const formBody = main.querySelector('#body')
+          const formBtn = main.querySelector('.button-outline')
+          formTitle.value = obj.title
+          formBody.value = obj.body
+          const form = main.querySelector('.edit-form')
+          form.addEventListener('submit', e => {
+            e.preventDefault()
+            const title = main.querySelector('#title').value
+            const body = main.querySelector('#body').value
+            obj.title = title
+            obj.body = body
+            noteAdapter.editNote(obj)
+            const editedNote = new Note(obj)
+            notesController.renderNote(editedNote)
+        })
+
+
+    })
+
+    }
+  })
+
+
 
 
 
